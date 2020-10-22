@@ -127,3 +127,4 @@ class Menu {
 }
 
 console.log(new Menu(menu));
+
