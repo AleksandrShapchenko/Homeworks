@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+
+.input-group {
+    padding: 15px;
+}
+
+.btn {
+    margin: 0 15px 15px;
+}
+
+.list-wrapp {
+    padding: 15px;
+}
+
+input.error {
+    border-color: #dc3545;
+}
+
+input.error:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+}
+
+input.success {
+    border-color: #28a745;
+}
+
+input.success:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40,167,69,.25);
+}
+
+.invalid-feedback {
+    display: none;
+}
+
+.invalid-feedback.message {
+    display: block;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}

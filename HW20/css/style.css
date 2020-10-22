@@ -1,0 +1,43 @@
+body {
+    background-color: rosybrown;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: linen;
+}
+
+.wrapper {
+    text-align: center;
+    padding: 0 40px 40px;
+    border: 2px solid;
+    border-color: mediumvioletred;
+    border-radius: 15px;
+}
+
+h1 {
+    margin: 20px -40px;
+    border-bottom: 2px solid;
+    border-color: mediumvioletred;
+    padding-bottom: 2px;
+}
+
+ol>li {
+    text-align: left;
+    cursor: pointer;
+    width: 200px;
+}
+
+.selected {
+    background-color: mediumvioletred;
+}
+
+.modal-content {
+    color: #000;
+}
+
+.modal-footer {
+    justify-content: center;
+}

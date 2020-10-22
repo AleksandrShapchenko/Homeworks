@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+.input-group {
+    padding: 15px;
+}
+
+.btn {
+    margin: 0 15px 15px;
+}
+
+.list-wrapp {
+    padding: 15px;
+}

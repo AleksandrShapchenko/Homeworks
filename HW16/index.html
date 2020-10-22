@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW16</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <main>
+        <div class="row">
+            <div class="col-6">
+                <form id='fill-out-form'>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">First and last name</span>
+                        </div>
+                        <input type="text" class="form-control" id="name">
+                        <input type="text" class="form-control" id="surname">
+                    </div>
+                    <div class="input-group marks">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Marks</span>
+                        </div>
+                        <input type="number" class="form-control" placeholder="Math">
+                        <input type="number" class="form-control" placeholder="Biology">
+                        <input type="number" class="form-control" placeholder="English">
+                    </div>
+                </form>
+                <button class="btn btn-primary" id="add-student">add student</button>
+            </div>
+            <div class="col-6">
+                <div class="list-wrapp">
+                    <p>List of Students</p>
+                    <ol class="list-of-students">
+                    </ol>
+                    <button class="btn btn-primary" id="upgrade-list">upgrade list</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
