@@ -1,45 +1,14 @@
-import { deals } from './js/instance/deals.js';
-import { menu } from './js/instance/menu.js';
-import { inputDeal } from '/js/DOMElements/inputDeal.js';
+import { List } from './js/class/listClass.js';
 
-window.onload = init;
+let ol = document.querySelector('#ol');
+let menuElem = document.querySelector('#menu');
+let inputDeal = document.querySelector('#input-deal');
 
-function init() {
+class Menu {
 
-    deals.ol.addEventListener('mousedown', function (event) {
-        event.preventDefault();
-    })
-
-    deals.ol.addEventListener('click', function (event) {
-
-        if (event.target == this) {
-            return false;
-        }
-
-        if (event.target.classList.contains('selected')) {
-            if (event.ctrlKey) {
-                clearSelected(event);
-                return;
-            } else {
-                clearAll(this.children);
-                return;
-            }
-        } else {
-            if (!event.ctrlKey) {
-                clearAll(this.children);
-            }
-
-            addSelected(event.target);
-        }
-    })
-
-    console.log(menu);
-}
-
-export class Menu {
-
-    constructor(elem) {
+    constructor(elem, list) {
         this._elem = elem;
+        this.list = list;
         elem.onclick = this.onClick.bind(this);
     }
 
@@ -56,33 +25,18 @@ export class Menu {
     }
 
     delete() {
-        let lists = deals.ol.querySelectorAll('li');
+        let lists = deals.list.querySelectorAll('li');
 
         deleteSelected(lists);
     }
 
     sort() {
-        let lists = deals.ol.querySelectorAll('li');
+        let classSelected = document.querySelectorAll('.selected');
 
-        let arrLists = Array.from(lists);
+        let arrLi = Array.from(classSelected);
 
-        arrLists.sort((a, b) => {
-            let i = 0;
-            console.log(a.textContent + i++);
-            console.log(b.textContent);
+        arrLi.forEach(elem => this.list.append(elem));
 
-            if (a.textContent < b.textContent)
-                return -1
-
-            if (a.textContent > b.textContent)
-                return 1
-
-            return 0
-        })
-
-        for (let i = 0; i < arrLists.length; i++) {
-            lists[i].textContent = arrLists[i].textContent;
-        }
     }
 
     onClick(event) {
@@ -93,16 +47,53 @@ export class Menu {
     };
 }
 
+let menu = new Menu(menuElem, ol);
+let deals = new List(ol);
+
+window.onload = init;
+
+function init() {
+
+    deals.list.addEventListener('mousedown', function (event) {
+        event.preventDefault();
+    })
+
+    deals.list.addEventListener('click', function (event) {
+
+        if (event.target == this) {
+            return false;
+        }
+
+        if (event.target.classList.contains('selected')) {
+            if (event.ctrlKey) {
+                deals.clearSelected(event);
+                return;
+            } else {
+                deals.clearAll(this.children);
+                return;
+            }
+        } else {
+            if (!event.ctrlKey) {
+                deals.clearAll(this.children);
+            }
+
+            deals.addSelected(event.target);
+        }
+    })
+
+    console.log(menu);
+}
+
 function setListToStart(deal) {
     let li = document.createElement('li');
     li.textContent = `${deal.value}`;
-    deals.ol.prepend(li);
+    deals.list.prepend(li);
 }
 
 function setListToEnd(deal) {
     let li = document.createElement('li');
     li.textContent = `${deal.value}`;
-    deals.ol.append(li);
+    deals.list.append(li);
 }
 
 function deleteSelected(elems) {
