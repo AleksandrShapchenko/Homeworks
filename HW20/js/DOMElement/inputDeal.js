@@ -1,0 +1,1 @@
+export let inputDeal = document.querySelector('#input-deal');

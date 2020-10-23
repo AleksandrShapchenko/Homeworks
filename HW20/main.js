@@ -1,73 +1,46 @@
-let ol = document.querySelector('#ol');
-let menu = document.querySelector('#menu');
-let inputDeal = document.querySelector('#input-deal');
+import { deals } from './js/instance/deals.js';
+import { menu } from './js/instance/menu.js';
+import { inputDeal } from '/js/DOMElements/inputDeal.js';
 
-function setListToStart(deal) {
-    let li = document.createElement('li');
-    li.textContent = `${deal.value}`;
-    ol.prepend(li);
-}
+window.onload = init;
 
-function setListToEnd(deal) {
-    let li = document.createElement('li');
-    li.textContent = `${deal.value}`;
-    ol.append(li);
-}
+function init() {
 
-function clearSelected(elem) {
-    elem.target.classList.remove('selected');
-}
+    deals.ol.addEventListener('mousedown', function (event) {
+        event.preventDefault();
+    })
 
-function clearAll(elems) {
-    for (let elem of elems) {
-        elem.classList.remove('selected');
-    }
-}
+    deals.ol.addEventListener('click', function (event) {
 
-function addSelected(target) {
-    target.classList.add('selected');
-}
+        if (event.target == this) {
+            return false;
+        }
 
-function deleteSelected(elems) {
-    elems.forEach(element => {
-        if (element.classList.contains('selected')) {
-            console.log(element);
-            element.remove();
+        if (event.target.classList.contains('selected')) {
+            if (event.ctrlKey) {
+                clearSelected(event);
+                return;
+            } else {
+                clearAll(this.children);
+                return;
+            }
+        } else {
+            if (!event.ctrlKey) {
+                clearAll(this.children);
+            }
+
+            addSelected(event.target);
         }
     })
+
+    console.log(menu);
 }
 
-ol.addEventListener('mousedown', function (event) {
-    event.preventDefault();
-})
+export class Menu {
 
-ol.addEventListener('click', function (event) {
-
-    if (event.target == this) {
-        return false;
-    }
-
-    if (event.target.classList.contains('selected')) {
-        if (event.ctrlKey) {
-            clearSelected(event);
-            return;
-        } else {
-            clearAll(this.children);
-            return;
-        }
-    } else {
-        if (!event.ctrlKey) {
-            clearAll(this.children);
-        }
-
-        addSelected(event.target);
-    }
-})
-
-class Menu {
     constructor(elem) {
         this._elem = elem;
-        elem.onclick = this.onClick.bind(this); // (*)
+        elem.onclick = this.onClick.bind(this);
     }
 
     addStart() {
@@ -83,15 +56,15 @@ class Menu {
     }
 
     delete() {
-        let lists = ol.querySelectorAll('li');
+        let lists = deals.ol.querySelectorAll('li');
 
         deleteSelected(lists);
     }
 
     sort() {
-        const lists = ol.querySelectorAll('li');
+        let lists = deals.ol.querySelectorAll('li');
 
-        const arrLists = Array.from(lists);
+        let arrLists = Array.from(lists);
 
         arrLists.sort((a, b) => {
             let i = 0;
@@ -106,15 +79,9 @@ class Menu {
 
             return 0
         })
-        console.log(arrLists);
-
-
 
         for (let i = 0; i < arrLists.length; i++) {
-            console.log(arrLists);
             lists[i].textContent = arrLists[i].textContent;
-            
-            debugger;
         }
     }
 
@@ -126,5 +93,22 @@ class Menu {
     };
 }
 
-console.log(new Menu(menu));
+function setListToStart(deal) {
+    let li = document.createElement('li');
+    li.textContent = `${deal.value}`;
+    deals.ol.prepend(li);
+}
 
+function setListToEnd(deal) {
+    let li = document.createElement('li');
+    li.textContent = `${deal.value}`;
+    deals.ol.append(li);
+}
+
+function deleteSelected(elems) {
+    elems.forEach(element => {
+        if (element.classList.contains('selected')) {
+            element.remove();
+        }
+    })
+}
