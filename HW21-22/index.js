@@ -1,7 +1,6 @@
 let boxSize = 32;
 let borderSize = 2;
 let gridCount = 13;
-let speed = 1000;
 let snakeLength = 5;
 let currentScore = 0;
 let food = createFood();
@@ -14,7 +13,7 @@ let score;
 let processGame;
 let snake;
 
-console.log(snake);
+console.log("snake :" + snake);
 document.addEventListener('DOMContentLoaded', init);
 document.addEventListener('keydown', snakeHandler);
 
@@ -94,23 +93,16 @@ function startGame(message = 'Have a nice game!') {
     currentScore = 0;
     score.textContent = currentScore;
     messageBox.textContent = message;
-    let randomBox = generateBoxForEat();
     snake = createSnakeData(Math.floor(gridCount / 2), Math.floor(gridCount / 2), snakeLength);
+    let speed = document.querySelector('#stacked-state').value;
+    let randomBox = generateBoxForEat();
 
     updateSnake();
     processGame = setInterval(() => {
         let {
             cell,
             row
-        } = snake[0];
-
-        // ----------------------------------
-        // Нужно чтобы ф-ция noWallMode (реализует возможность змейки проходить через стены) работала так
-        // let {
-        //     cell,
-        //     row
-        // } = noWallMode(snake[0])
-        // ----------------------------------
+        } = noWallMode(snake[0]);
 
         switch (direction) {
             case 'left': {
@@ -143,15 +135,25 @@ function startGame(message = 'Have a nice game!') {
                 break;
         }
 
-        snake.pop()
-        console.log(snake[0].cell, snake.length);
+        // console.log(snake[0].cell, snake.length);
         updateSnake();
     }, speed);
+
+    function noWallMode({ cell, row }) {
+        cell = (cell == 0 && direction == 'left') ? gridCount :
+            (cell == gridCount && direction == 'right') ? -1 : cell;
+
+        row = (row == 0 && direction == 'up') ? gridCount :
+            (row == gridCount && direction == 'down') ? -1 : row;
+
+        return { cell, row };
+    }
 
     function updateSnake() {
         clearSnake();
 
         checkOnEated(randomBox.dataset);
+        checkOnTailCrush();
 
         function checkOnEated(dataset) {
             let {
@@ -161,20 +163,23 @@ function startGame(message = 'Have a nice game!') {
 
             if (cell == dataset.cell && row == dataset.row) {
                 score.textContent = `${++currentScore}`;
-                snake.push({
-                    cell: snake[snake.length - 1].cell,
-                    row: snake[snake.length - 1].row,
-                })
 
                 removeFood();
                 randomBox = generateBoxForEat();
+            } else {
+                snake.pop();
             }
         }
 
-        // ----------------------------------
-        // написать ф-цию checkOnTailCrush, которая проверяет врезалась ли голова змейки в себя же, если да - завершить игру
-        // checkOnTailCrush();
-        // ---------------------------------------
+        function checkOnTailCrush() {
+            let snakeHead = snake[0];
+
+            snake.slice(1).forEach(elem => {
+                if (snakeHead.cell == elem.cell && snakeHead.row == elem.row) {
+                    endGame();
+                }
+            });
+        }
 
         for (const [index, snakePart] of snake.entries()) {
             let cell = findByCoords(snakePart.cell, snakePart.row);
@@ -190,8 +195,15 @@ function startGame(message = 'Have a nice game!') {
     function generateBoxForEat() {
         let cell = getRandomInt(0, gridCount);
         let row = getRandomInt(0, gridCount);
+
+        while (checkCoordsOnSnake(cell, row)) {
+            cell = getRandomInt(0, gridCount);
+            row = getRandomInt(0, gridCount);
+        };
+        
         let randomBox = findByCoords(cell, row);
         randomBox.append(food);
+
         return randomBox;
     }
 
@@ -199,12 +211,10 @@ function startGame(message = 'Have a nice game!') {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-
 }
 
 function endGame(message = 'Game Over!') {
     messageBox.textContent = message;
-    snake = createSnakeData(Math.floor(gridCount / 2), Math.floor(gridCount / 2), snakeLength);
     direction = 'left';
     clearTimeout(processGame);
     clearSnake();
@@ -244,6 +254,17 @@ function createSnakeCell(snakeClass, row, cell) {
     div.setAttribute('data-row', row);
     div.style.width = div.style.height = boxSize + 'px';
     return div;
+}
+
+function checkCoordsOnSnake(cell, row) {
+    let result = false;
+    for (const part of snake) {
+        if (part.cell == cell && part.row == row) {
+            result = true
+        }
+    }
+
+    return result;
 }
 
 function find(selector) {
