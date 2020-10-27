@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+    <h1 id="message">Welcome to Snake !</h1>
+    <span class="score">Score: <b> 0 </b></span>
+    <section>
+        <div class="snake-wrapper">
+            <div id="snake-container">
+            </div>
+            <div class="controls">
+                <form id="controls-form">
+                    <label>
+                        <span class="label">Speed</span>
+                        <select id="stacked-state" name="speed">
+                            <option value="600">Small</option>
+                            <option value="300">Medium</option>
+                            <option value="200">Fast</option>
+                            <option value="100">Faster</option>
+                            <option value="50">Extra</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        <span class="label"> ... </span>
+                    </label>
+                </form>
+                <button id="start-game" class="ui green basic button">Start Game</button>
+                <button style="display: none;" id="end-game" class="ui red basic button">End Game</button>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
