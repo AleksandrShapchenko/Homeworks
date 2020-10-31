@@ -58,7 +58,7 @@ function validateInputs(elements) {
 
     Array.prototype.map.call(elements, elem => {
         if (elem.name) {
-            if (!(elem.value.length || elem.value.includes(' '))) {
+            if (!elem.value.length) {
                 valid = false;
                 elem.classList.add('error');
                 elem.classList.remove('success');
