@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW18</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/styles.css">
+    <script type="module" src="./js/store-service.js"></script>
+    <script type="module" src="./js/order.js"></script>
+    <script type="module" src="./js/validate.js"></script>
+    <script type="module" src="./main.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="bg-black">
+            <div class="container">
+                <h1 class='main-header'>Заказ Пиццы</h1>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="form-wrapper">
+                <form class="fill-out-form">
+                    <p class="form-label">Выберите нужную пиццу:</p>
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-5 pt-0">Выберите размер пиццы:</legend>
+                            <div class="col-sm-7">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" value="0">
+                                    <label class="form-check-label" for="gridRadios1">
+                                        Маленькая
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" value="1"
+                                        checked>
+                                    <label class="form-check-label" for="gridRadios2">
+                                        Средняя
+                                    </label>
+                                </div>
+                                <div class="form-check disabled">
+                                    <input class="form-check-input" type="radio" name="gridRadios" value="2">
+                                    <label class="form-check-label" for="gridRadios3">
+                                        Большая
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group row">
+                        <div class="col-sm-5">Выберите нужные ингридиенты:</div>
+                        <div class="col-sm-7">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="gridCheck" id="gridCheck1"
+                                    value="tomato">
+                                <label class="form-check-label" for="gridCheck1">
+                                    Помидор
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="gridCheck" id="gridCheck2"
+                                    value="cheese">
+                                <label class="form-check-label" for="gridCheck2">
+                                    Сыр
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="gridCheck" id="gridCheck3"
+                                    value="salami">
+                                <label class="form-check-label" for="gridCheck3">
+                                    Салями
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="gridCheck" id="gridCheck4"
+                                    value="olives">
+                                <label class="form-check-label" for="gridCheck4">
+                                    Маслины
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="gridCheck" id="gridCheck5"
+                                    value="bacon">
+                                <label class="form-check-label" for="gridCheck5">
+                                    Бекон
+                                </label>
+                            </div>
+                            <div class="invalid-feedback">Пожалуйста выберите как минимум 3 ингридиента.</div>
+                        </div>
+                    </div>
+                </form>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary" id='order'>Заказать</button>
+                        <div class="invalid-feedback payment">Ошибка при оплате. Пожалуйста попробуйте еще раз.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
