@@ -1,3 +1,4 @@
+import { validateInputs, validEmail, validName, validPassword, validRepeatPas } from './js/validation.js';
 import { Human } from './js/people.js';
 import { People } from './js/people.js';
 
@@ -38,57 +39,7 @@ function init() {
 
 }
 
-function validateInputs(elements) {
-    let valid = true;
-
-    Array.prototype.map.call(elements, elem => {
-        if (elem.name) {
-            if (!elem.value.length) {
-                valid = false;
-                elem.classList.add('error');
-                elem.classList.remove('success');
-            } else {
-                elem.classList.add('success');
-                elem.classList.remove('error');
-            }
-
-        }
-    })
-
-    return valid;
-}
-
-function validEmail(email, btnElem) {
-
-    if (!email.value.includes('@') || email.value.match(' ')) {
-        email.classList.add('error');
-        email.classList.remove('success');
-        btnDisableControl(false, btnElem);
-    }
-
-    controlFeedback(email, 'Неправильный формат email', 'email');
-}
-
-function validName(name) {
-    controlFeedback(name, 'Введите корректное имя', 'name');
-}
-
-function validPassword(password) {
-    controlFeedback(password, 'Введите надёжный пароль', 'password');
-}
-
-function validRepeatPas(repeatPas, btnElem) {
-
-    if (repeatPas.value !== form.elements.password.value) {
-        repeatPas.classList.add('error');
-        repeatPas.classList.remove('success');
-        btnDisableControl(false, btnElem);
-    }
-
-    controlFeedback(repeatPas, 'Пароли не совпадают', 'repeatPas');
-}
-
-function controlFeedback(elem, text, elemName) {
+export function controlFeedback(elem, text, elemName) {
     let feedback;
 
     if (elem.classList.contains('error') && !elem.dataset.feedback) {
@@ -104,7 +55,7 @@ function controlFeedback(elem, text, elemName) {
 
 }
 
-function btnDisableControl(cb, elem) {
+export function btnDisableControl(cb, elem) {
     if (!cb) {
         elem.setAttribute('disabled', 'true');
     } else {
