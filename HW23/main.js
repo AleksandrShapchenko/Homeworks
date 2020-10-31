@@ -36,21 +36,6 @@ function init() {
 
     }
 
-    // form.onsubmit = function() {
-    //     preventDefault();
-
-    //     let personConfig = {
-    //         email: form.elements.email.value,
-    //         name: form.elements.name.value,
-    //         password: form.elements.password.value,
-    //     }
-
-    //     let newPerson = new Human(personConfig);
-    //     People.setHuman(newPerson);
-    //     console.log(newPerson);
-    //     console.log(People.peopleStore);
-    // }
-
 }
 
 function validateInputs(elements) {
@@ -75,7 +60,7 @@ function validateInputs(elements) {
 
 function validEmail(email, btnElem) {
 
-    if (!email.value.includes('@')) {
+    if (!email.value.includes('@') || email.value.match(' ')) {
         email.classList.add('error');
         email.classList.remove('success');
         btnDisableControl(false, btnElem);
