@@ -73,21 +73,16 @@ function removeFood() {
 }
 
 function startHandler() {
-    startBtn.style.display = 'none';
-    endBtn.style.display = 'inline-block';
-
     startGame();
 }
 
 
 function endHandler() {
-    endBtn.style.display = 'none';
-    startBtn.style.display = 'inline-block';
-
     endGame();
 }
 
 function startGame(message = 'Have a nice game!') {
+    showEndBtn(startBtn, endBtn);
     currentScore = 0;
     score.textContent = currentScore;
     messageBox.textContent = message;
@@ -138,10 +133,10 @@ function startGame(message = 'Have a nice game!') {
 
     function noWallMode({ cell, row }) {
         cell = (cell == 0 && direction == 'left') ? gridCount :
-            (cell == gridCount && direction == 'right') ? -1 : cell;
+            (cell == (gridCount - 1) && direction == 'right') ? -1 : cell;
 
         row = (row == 0 && direction == 'up') ? gridCount :
-            (row == gridCount && direction == 'down') ? -1 : row;
+            (row == (gridCount - 1) && direction == 'down') ? -1 : row;
 
         return { cell, row };
     }
@@ -174,6 +169,7 @@ function startGame(message = 'Have a nice game!') {
 
             snake.slice(1).forEach(elem => {
                 if (snakeHead.cell == elem.cell && snakeHead.row == elem.row) {
+
                     endGame();
                 }
             });
@@ -213,6 +209,7 @@ function startGame(message = 'Have a nice game!') {
 }
 
 function endGame(message = 'Game Over!') {
+    showStartBtn(startBtn, endBtn);
     messageBox.textContent = message;
     direction = 'left';
     clearTimeout(processGame);
@@ -272,4 +269,14 @@ function find(selector) {
 
 function findByCoords(cell, row) {
     return document.querySelector(`[data-cell = "${cell}"][data-row = "${row}"]`);
+}
+
+function showEndBtn(start, end) {
+    start.style.display = 'none';
+    end.style.display = 'inline-block';
+}
+
+function showStartBtn(start, end) {
+    end.style.display = 'none';
+    start.style.display = 'inline-block';
 }
