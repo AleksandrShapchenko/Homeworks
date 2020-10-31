@@ -13,7 +13,6 @@ let score;
 let processGame;
 let snake;
 
-console.log("snake :" + snake);
 document.addEventListener('DOMContentLoaded', init);
 document.addEventListener('keydown', snakeHandler);
 
@@ -22,7 +21,6 @@ function snakeHandler(event) {
 }
 
 function updateDirection(event) {
-    console.log(event.keyCode);
     if (event.keyCode == 37 && direction != 'right')
         direction = 'left';
     if (event.keyCode == 38 && direction != 'down')
@@ -135,16 +133,15 @@ function startGame(message = 'Have a nice game!') {
                 break;
         }
 
-        // console.log(snake[0].cell, snake.length);
         updateSnake();
     }, speed);
 
     function noWallMode({ cell, row }) {
         cell = (cell == 0 && direction == 'left') ? gridCount :
-            (cell == gridCount && direction == 'right') ? -1 : cell;
+            (cell == (gridCount - 1) && direction == 'right') ? -1 : cell;
 
         row = (row == 0 && direction == 'up') ? gridCount :
-            (row == gridCount && direction == 'down') ? -1 : row;
+            (row == (gridCount - 1) && direction == 'down') ? -1 : row;
 
         return { cell, row };
     }
@@ -166,6 +163,7 @@ function startGame(message = 'Have a nice game!') {
 
                 removeFood();
                 randomBox = generateBoxForEat();
+                console.log('яблоко сьедено, длина: +1, очки: +1');
             } else {
                 snake.pop();
             }
@@ -197,10 +195,11 @@ function startGame(message = 'Have a nice game!') {
         let row = getRandomInt(0, gridCount);
 
         while (checkCoordsOnSnake(cell, row)) {
+            console.log('Поиск новых координат для яблока');
             cell = getRandomInt(0, gridCount);
             row = getRandomInt(0, gridCount);
         };
-        
+
         let randomBox = findByCoords(cell, row);
         randomBox.append(food);
 
