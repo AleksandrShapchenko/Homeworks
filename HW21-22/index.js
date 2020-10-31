@@ -145,7 +145,9 @@ function startGame(message = 'Have a nice game!') {
         clearSnake();
 
         checkOnEated(randomBox.dataset);
-        checkOnTailCrush();
+        if (checkOnTailCrush()) {
+            return;
+        }
 
         function checkOnEated(dataset) {
             let {
@@ -165,14 +167,17 @@ function startGame(message = 'Have a nice game!') {
         }
 
         function checkOnTailCrush() {
+            let crush = false;
             let snakeHead = snake[0];
 
             snake.slice(1).forEach(elem => {
                 if (snakeHead.cell == elem.cell && snakeHead.row == elem.row) {
-
                     endGame();
+                    crush = true;
                 }
             });
+
+            return crush;
         }
 
         for (const [index, snakePart] of snake.entries()) {
