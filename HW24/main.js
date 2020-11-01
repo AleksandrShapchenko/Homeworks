@@ -27,21 +27,13 @@ function init() {
         let size = fillOutForm.elements.gridRadios.value,
             status;
 
-        if (!Order.getDone(size, invalidPayment)) {
-            return false;
-        }
+        Order.getDone(size, invalidPayment).then(() => {
+            showOrderProcess();
+        }).then(() => {
+            newOrder = new Order({ size, ingridients, status });
+            orderStore.setItem(newOrder);
+        })
 
-        newOrder = new Order({ size, ingridients, status });
-
-        orderStore.setItem(newOrder);
-
-        showOrderProcess().then(() => {
-            return new Promise((resolve) => {
-                getFeedback(formWrapper);
-                feedbackEvent(formWrapper);
-                resolve();
-            })
-        });
     }
 
 }
@@ -54,25 +46,29 @@ function showOrderProcess() {
             formWrapper.innerHTML = `<p>Спасибо за заказ. ${message}</p>`;
             resolve();
         }, 500)
-    })
-        .then(() => {
+    }).then(() => {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     let message = 'Пожалуйста подождите, курьер доставляет пиццу.';
                     newOrder.status = 'cooked';
                     formWrapper.innerHTML = `<p>Спасибо за заказ. ${message}</p>`;
                     resolve();
-                }, 3000)
+                }, 2000)
             })
-        })
-        .then(() => {
+        }).then(() => {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     let message = 'Пицца доставлена, приятного аппетита.';
                     newOrder.status = 'deliveried';
                     formWrapper.innerHTML = `<p>Спасибо за заказ. ${message}</p>`;
                     resolve();
-                }, 6000)
+                }, 4000)
+            })
+        }).then(() => {
+            return new Promise((resolve) => {
+                getFeedback(formWrapper);
+                feedbackEvent(formWrapper);
+                resolve();
             })
         })
 
