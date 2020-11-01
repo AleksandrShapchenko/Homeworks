@@ -47,11 +47,11 @@ export class Order {
                 reject();
             }
         }).then(() => {
-            Order.getPayment(cost);
+            return Order.getPayment(cost);
         }).then(() => {
-            Order.deliteError(feedback);
+            return Order.deliteError(feedback);
         }).catch(() => {
-            Order.showError(feedback);
+            return Order.showError(feedback);
         })
     }
 
