@@ -28,10 +28,9 @@ function init() {
             status;
 
         Order.getDone(size, invalidPayment).then(() => {
-            showOrderProcess();
-        }).then(() => {
             newOrder = new Order({ size, ingridients, status });
             orderStore.setItem(newOrder);
+            return showOrderProcess();
         })
 
     }
