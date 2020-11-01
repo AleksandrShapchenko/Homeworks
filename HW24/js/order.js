@@ -23,48 +23,36 @@ export class Order {
         return new Promise((resolve, reject) => {
             let payment = confirm(`Оплатить ${cost}$?`);
             if (payment) {
-                resolve()
+                resolve();
             } else {
-                reject()
+                reject();
             }
-        });
+        })
     }
 
     static getDone(size, feedback) {
-        let done = false;
+        let cost;
 
-        switch (+size) {
-            case 0: {
-                Order.getPayment(5).then(() => {
-                    Order.deliteError(feedback);
-                    done = true;
-                }).catch(() => {
-                    Order.showError(feedback);
-                })
-            };
-                break;
-            case 1: {
-                Order.getPayment(10).then(() => {
-                    Order.deliteError(feedback);
-                    done = true;
-                }).catch(() => {
-                    Order.showError(feedback);
-                })
-            };
-                break;
-            case 2: {
-                Order.getPayment(15).then(() => {
-                    Order.deliteError(feedback);
-                    done = true;
-                }).catch(() => {
-                    Order.showError(feedback);
-                })
-            };
-                break;
-
-        }
-        console.log(done);
-        return done;
+        return new Promise((resolve, reject) => {
+            if (+size == 0) {
+                cost = 5;
+                resolve();
+            } else if (+size == 1) {
+                cost = 10;
+                resolve();
+            } else if (+size == 2) {
+                cost = 15;
+                resolve();
+            } else {
+                reject();
+            }
+        }).then(() => {
+            Order.getPayment(cost);
+        }).then(() => {
+            Order.deliteError(feedback);
+        }).catch(() => {
+            Order.showError(feedback);
+        })
     }
 
     static showError(feedback) {
