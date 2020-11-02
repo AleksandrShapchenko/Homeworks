@@ -51,7 +51,8 @@ export class Order {
         }).then(() => {
             return Order.deliteError(feedback);
         }).catch(() => {
-            return Order.showError(feedback);
+            Order.showError(feedback);
+            reject();
         })
     }
 

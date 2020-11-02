@@ -31,6 +31,8 @@ function init() {
             newOrder = new Order({ size, ingridients, status });
             orderStore.setItem(newOrder);
             return showOrderProcess();
+        }).catch(() => {
+             console.log('error');
         })
 
     }
