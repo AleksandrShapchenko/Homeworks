@@ -25,7 +25,7 @@ export class Order {
             if (payment) {
                 resolve();
             } else {
-                reject();
+                reject(new Error('payment failed'));
             }
         })
     }
@@ -44,15 +44,15 @@ export class Order {
                 cost = 15;
                 resolve();
             } else {
-                reject();
+                reject(new Error('uncorrect size or cost data'));
             }
         }).then(() => {
             return Order.getPayment(cost);
         }).then(() => {
             return Order.deliteError(feedback);
-        }).catch(() => {
+        }).catch((error) => {
             Order.showError(feedback);
-            reject();
+            throw error;
         })
     }
 

@@ -31,8 +31,8 @@ function init() {
             newOrder = new Order({ size, ingridients, status });
             orderStore.setItem(newOrder);
             return showOrderProcess();
-        }).catch(() => {
-             console.log('error');
+        }).catch((error) => {
+            throw error;
         })
 
     }
@@ -40,39 +40,58 @@ function init() {
 }
 
 function showOrderProcess() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
-            let message = 'Пожалуйста подождите, пицца готовится.';
-            newOrder.status = 'ordered';
-            formWrapper.innerHTML = `<p>Спасибо за заказ. ${message}</p>`;
-            resolve();
+            setStatus('ordered');
+            if (newOrder.status == 'ordered') {
+                showMessage('Пожалуйста подождите, пицца готовится.');
+                resolve()
+            } else {
+                reject(new Error('pizza is not ordered'))
+            }
         }, 500)
     }).then(() => {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    let message = 'Пожалуйста подождите, курьер доставляет пиццу.';
-                    newOrder.status = 'cooked';
-                    formWrapper.innerHTML = `<p>Спасибо за заказ. ${message}</p>`;
-                    resolve();
-                }, 2000)
-            })
-        }).then(() => {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    let message = 'Пицца доставлена, приятного аппетита.';
-                    newOrder.status = 'deliveried';
-                    formWrapper.innerHTML = `<p>Спасибо за заказ. ${message}</p>`;
-                    resolve();
-                }, 4000)
-            })
-        }).then(() => {
-            return new Promise((resolve) => {
-                getFeedback(formWrapper);
-                feedbackEvent(formWrapper);
-                resolve();
-            })
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                setStatus('cooked');
+                if (newOrder.status == 'cooked') {
+                    showMessage('Пожалуйста подождите, курьер доставляет пиццу.');
+                    resolve()
+                } else {
+                    reject(new Error('pizza is not cooked'))
+                }
+            }, 2000)
         })
+    }).then(() => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                setStatus('deliveried');
+                if (newOrder.status == 'deliveried') {
+                    showMessage('Пицца доставлена, приятного аппетита.');
+                    resolve()
+                } else {
+                    reject(new Error('pizza is not deliveried'))
+                }
+            }, 4000)
+        })
+    }).then(() => {
+        return new Promise((resolve) => {
+            getFeedback(formWrapper);
+            feedbackEvent(formWrapper);
+            resolve();
+        })
+    }).catch((error) => {
+        throw error;
+    })
 
+}
+
+function setStatus(status) {
+    newOrder.status = status;
+}
+
+function showMessage(message) {
+    formWrapper.innerHTML = `<p>Спасибо за заказ. ${message}</p>`;
 }
 
 function getFeedback(form) {
