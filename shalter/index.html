@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/store.js"></script>
+    <script src="./js/animal.js"></script>
+    <script src="./main.js"></script>
+</head>
+
+<body>
+    <section class="shalter">
+        <div class="form-wrapper">
+            <form id='fill-out-form'>
+                <p>Кого добавить в питомник?</p>
+                <div>
+                    Кот <input type="radio" name="who" checked class="radio" value="0">
+                    Собака <input type="radio" name="who" class="radio" value="1">
+                </div>
+                <input type="text" placeholder="Цвет животного" id='color'>
+                <input type="text" placeholder="Порода животного" id='breed'>
+                <input type="text" placeholder="Имя животного" id='name'>
+                <input type="number" placeholder="Номер животного" id='number'>
+            </form>
+            <div>
+                <button id="describe">Отправить</button>
+            </div>
+        </div>
+        <div class="list">
+            <div id="list">
+                <p>
+                    <i>Здесь будет ваш список</i>
+                </p>
+            </div>
+            <button id="getList">Обновить</button>
+        </div>
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+input{
+    padding: 4px;
+    border-radius: 4px;
+    margin: 5px 0;
+    display: block;
+}
+.photo-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 5px;
+}
