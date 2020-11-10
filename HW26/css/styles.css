@@ -10,12 +10,13 @@ input{
 }
 
 .post {
+    word-wrap: break-word;
+    white-space: pre-wrap;
     width: 400px;
     display: block;
     margin: 10px 20px 30px;
 }
 
 .post-header {
-    font-size: 20px;
     color: limegreen;
 }
