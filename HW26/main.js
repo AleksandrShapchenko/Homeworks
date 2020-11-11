@@ -52,11 +52,11 @@ function init() {
                 if (key != 'userId' && key != 'id') {
                     keyValue = `${key}: ${value}\n`;
                     span.append(keyValue);
-                    post.append(span);
                 }
 
             }
-
+            
+            post.append(span);
             postContainer.append(post);
             postHistory.push(data);
             postInput.disabled = false;
@@ -82,11 +82,11 @@ function init() {
                     if (key == 'email' || key == 'body') {
                         keyValue = `${key}: ${value}\n`;
                         span.append(keyValue);
-                        post.append(span);
                     }
 
                 }
             }
+            post.append(span);
         }
     }
 }
