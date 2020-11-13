@@ -1,0 +1,41 @@
+{
+  "users": [
+    {
+      "name": "Sierra Melendez",
+      "email": "nutyranut@mailinator.net",
+      "password": "12345678",
+      "usersId": "haQsfFFg7"
+    },
+    {
+      "name": "Liberty Mayer",
+      "email": "gitoc@mailinator.net",
+      "password": "12345678",
+      "usersId": "45W1RkFd6"
+    },
+    {
+      "name": "Britanney Arnold",
+      "email": "qybu@mailinator.com",
+      "password": "12345678",
+      "usersId": "o29Qhfp-P"
+    },
+    {
+      "name": "Macaulay Marshall",
+      "email": "gicazovy@mailinator.com",
+      "password": "12345678",
+      "usersId": "ToZTpT5uW"
+    },
+    {
+      "name": "Tatiana Hoffman",
+      "email": "ketoky@mailinator.net",
+      "password": "12345678",
+      "usersId": "0L14nmRxy"
+    },
+    {
+      "name": "Tatiana Hoffman",
+      "email": "ketoky@mailinator.net",
+      "password": "12345678",
+      "usersId": "oOV6JSxDN"
+    }
+  ],
+  "count": 0
+}
