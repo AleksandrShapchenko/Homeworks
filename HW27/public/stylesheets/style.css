@@ -52,6 +52,14 @@ hr {
 #regForm {
   display: none;
 }
+
+#delForm {
+  display: none;
+}
+
+#putForm {
+  display: none;
+}
 /* Add a blue text color to links */
 a {
   color: dodgerblue;

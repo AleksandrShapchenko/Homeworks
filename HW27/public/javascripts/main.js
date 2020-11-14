@@ -10,8 +10,10 @@ class User {
 // put & delete - users/idUSer
 class UserApi {
     static baseUrl = 'users';
+    static userIdUrl = 'userId';
 
     static getUsers() {
+        console.log(UserApi.baseUrl.userId);
         return fetch(UserApi.baseUrl);
     }
 
@@ -24,18 +26,32 @@ class UserApi {
             },
         });
     }
+
+    static deleteUser(user) {
+        return fetch(UserApi.baseUrl, {
+            method: "delete",
+
+        })
+    }
+
+    static putUser(user) {
+        return fetch(UserApi.baseUrl, {
+            method: "put",
+
+        })
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    let form = document.querySelector('#regForm');
+    let regForm = document.querySelector('#regForm');
     let usersContainer = document.querySelector('#users');
-    // console.dir(form.elements);
+    // console.dir(regForm.elements);
 
-    form.addEventListener('submit', (e) => {
+    regForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        let { name, email, password } = form.elements;
+        let { name, email, password } = regForm.elements;
         let user = new User({
             name: name.value,
             email: email.value,
@@ -46,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         UserApi.sendUser(user)
                 .then( response => {
                     console.log(response);
-                    form.style.display = "none";
+                    regForm.style.display = "none";
                     usersContainer.style.display = "block";
                 })
     })
@@ -56,13 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let controls = document.querySelector('#controls');
     controls.addEventListener('click', (e) => {
         if(e.target.id == "add") {
-            form.style.display = "block";
+            regForm.style.display = "block";
             usersContainer.style.display = "none";
 
         }
         if(e.target.id == "get") {
             usersContainer.style.display = "block";
-            form.style.display = "none";
+            regForm.style.display = "none";
             
             renderUserList()
         }

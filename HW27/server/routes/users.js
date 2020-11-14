@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
   }
 
   let usersId = shortid.generate();
-  db.get('users').push({...req.body, usersId }).write();
+  db.get('users').push({...req.body, usersId });
 
   res.status(200).json({
     status: 'succes',
