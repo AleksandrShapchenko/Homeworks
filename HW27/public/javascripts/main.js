@@ -28,13 +28,15 @@ class UserApi {
     static deleteUser(userId) {
         return fetch(UserApi.baseUrl, {
             method: "delete",
-
+            body: JSON.stringify(userId),
+            
         })
     }
 
-    static putUser(userId) {
+    static putUser(user, userId) {
         return fetch(UserApi.baseUrl, {
             method: "put",
+            body: JSON.stringify(user),
 
         })
     }
