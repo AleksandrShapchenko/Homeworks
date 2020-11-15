@@ -10,10 +10,8 @@ class User {
 // put & delete - users/idUSer
 class UserApi {
     static baseUrl = 'users';
-    static userIdUrl = 'userId';
 
     static getUsers() {
-        console.log(UserApi.baseUrl.userId);
         return fetch(UserApi.baseUrl);
     }
 
@@ -27,14 +25,14 @@ class UserApi {
         });
     }
 
-    static deleteUser(user) {
+    static deleteUser(userId) {
         return fetch(UserApi.baseUrl, {
             method: "delete",
 
         })
     }
 
-    static putUser(user) {
+    static putUser(userId) {
         return fetch(UserApi.baseUrl, {
             method: "put",
 
@@ -45,6 +43,8 @@ class UserApi {
 document.addEventListener('DOMContentLoaded', () => {
 
     let regForm = document.querySelector('#regForm');
+    let delForm = document.querySelector('#delForm');
+    let putForm = document.querySelector('#putForm');
     let usersContainer = document.querySelector('#users');
     // console.dir(regForm.elements);
 
@@ -74,14 +74,30 @@ document.addEventListener('DOMContentLoaded', () => {
         if(e.target.id == "add") {
             regForm.style.display = "block";
             usersContainer.style.display = "none";
-
+            delForm.style.display = "none";
+            putForm.style.display = "none";
+        }
+        if(e.target.id == "delete") {
+            delForm.style.display = "block";
+            usersContainer.style.display = "none";
+            regForm.style.display = "none";
+            putForm.style.display = "none";
+        }
+        if(e.target.id == "put") {
+            putForm.style.display = "block";
+            usersContainer.style.display = "none";
+            regForm.style.display = "none";
+            delForm.style.display = "none";
         }
         if(e.target.id == "get") {
             usersContainer.style.display = "block";
             regForm.style.display = "none";
+            delForm.style.display = "none";
+            putForm.style.display = "none";
             
             renderUserList()
         }
+
     })
 
     function renderUserList() {
