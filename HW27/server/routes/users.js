@@ -42,6 +42,9 @@ router.get('/', function(req, res, next) {
     data: users,
   }); 
 
+  console.log(req.users);
+  // req.users[req.body.user.id] = req.body.user;
+
 });
 
 module.exports = router;

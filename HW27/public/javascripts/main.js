@@ -1,6 +1,6 @@
 
 class User {
-    constructor({name, email, password}) {
+    constructor({ name, email, password }) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -26,18 +26,23 @@ class UserApi {
     }
 
     static deleteUser(userId) {
-        return fetch(UserApi.baseUrl, {
+        let userIdUrl = UserApi.baseUrl + '/' + userId;
+        console.log(userIdUrl);
+        return fetch(userIdUrl, {
             method: "delete",
             body: JSON.stringify(userId),
-            
+
         })
     }
 
     static putUser(user, userId) {
+        let userIdUrl = UserApi.baseUrl + '/' + userId;
         return fetch(UserApi.baseUrl, {
             method: "put",
             body: JSON.stringify(user),
-
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
         })
     }
 }
@@ -62,41 +67,73 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(user);
 
         UserApi.sendUser(user)
-                .then( response => {
-                    console.log(response);
-                    regForm.style.display = "none";
-                    usersContainer.style.display = "block";
-                })
+            .then(response => {
+                console.log(response);
+                regForm.style.display = "none";
+                usersContainer.style.display = "block";
+            })
+    })
+
+    delForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        let userId = delForm.elements.delete.value;
+
+        UserApi.deleteUser(userId)
+            .then(response => {
+                console.log(response);
+                regForm.style.display = "none";
+                usersContainer.style.display = "block";
+            })
+    })
+
+    putForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        let { name, email, password, userId } = putForm.elements;
+        let user = new User({
+            name: name.value,
+            email: email.value,
+            password: password.value
+        });
+        console.log(user);
+
+        UserApi.sendUser(user)
+            .then(response => {
+                console.log(response);
+                regForm.style.display = "none";
+                usersContainer.style.display = "block";
+            })
     })
 
 
 
     let controls = document.querySelector('#controls');
     controls.addEventListener('click', (e) => {
-        if(e.target.id == "add") {
+        if (e.target.id == "add") {
             regForm.style.display = "block";
             usersContainer.style.display = "none";
             delForm.style.display = "none";
             putForm.style.display = "none";
         }
-        if(e.target.id == "delete") {
+        if (e.target.id == "delete") {
             delForm.style.display = "block";
             usersContainer.style.display = "none";
             regForm.style.display = "none";
             putForm.style.display = "none";
         }
-        if(e.target.id == "put") {
+        if (e.target.id == "put") {
             putForm.style.display = "block";
             usersContainer.style.display = "none";
             regForm.style.display = "none";
             delForm.style.display = "none";
         }
-        if(e.target.id == "get") {
+        if (e.target.id == "get") {
             usersContainer.style.display = "block";
             regForm.style.display = "none";
             delForm.style.display = "none";
             putForm.style.display = "none";
-            
+
             renderUserList()
         }
 
@@ -104,17 +141,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderUserList() {
         UserApi.getUsers()
-                .then( res => res.json())
-                .then( data => data.data)
-                .then( users => {
-                    usersContainer.innerHTML = '';
-                    users.forEach( user => {
-                        usersContainer.innerHTML += `
+            .then(res => res.json())
+            .then(data => data.data)
+            .then(users => {
+                usersContainer.innerHTML = '';
+                users.forEach(user => {
+                    usersContainer.innerHTML += `
                             <h1 class="name">${user.name}</h1>
                             <p class="email">${user.email}</p>
                         `
-                    })
                 })
+            })
     }
 })
 
