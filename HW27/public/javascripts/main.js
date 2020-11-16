@@ -31,6 +31,9 @@ class UserApi {
         return fetch(userIdUrl, {
             method: "delete",
             body: JSON.stringify(userId),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
 
         })
     }
@@ -44,6 +47,7 @@ class UserApi {
                 "Content-type": "application/json; charset=UTF-8"
             },
         })
+        
     }
 }
 

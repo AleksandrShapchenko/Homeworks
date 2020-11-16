@@ -28,18 +28,18 @@ router.get('/', function(req, res, next) {
     data: usersId,
   });
 
-}).delete('/', function(req, res, next) {
-  let users = db.get('users');
+}).delete('/userId', function(req, res, next) {
+  let userId = db.delete('users.userId');
   res.status(200).json({
     status: 'succes',
-    data: users,
+    data: userId,
   }); 
 
-}).put('/', function(req, res, next) {
-  let users = db.get('users');
+}).put('/userId', function(req, res, next) {
+  let userId = db.put('users');
   res.status(200).json({
     status: 'succes',
-    data: users,
+    data: data,
   }); 
 
   console.log(req.users);
