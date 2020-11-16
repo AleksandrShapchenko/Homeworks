@@ -28,14 +28,13 @@ router.get('/', function(req, res, next) {
     data: usersId,
   });
 
-}).delete('/:userId', function(req, res, next) {
-  let userId = db.delete('users.userId');
+}).delete('/:id', function(req, res, next) {
   res.status(200).json({
     status: 'succes',
     data: userId,
   }); 
 
-}).put('/userId', function(req, res, next) {
+}).put('/:id', function(req, res, next) {
   let userId = db.put('users');
   res.status(200).json({
     status: 'succes',

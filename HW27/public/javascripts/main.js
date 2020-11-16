@@ -15,6 +15,7 @@ class UserApi {
     }
 
     static sendUser(user) {
+        console.log(UserApi.baseUrl);
         return fetch(UserApi.baseUrl, {
             method: "post",
             body: JSON.stringify(user),
@@ -24,18 +25,14 @@ class UserApi {
         });
     }
 
-    static deleteUser(userId) {
-        let userIdUrl = UserApi.baseUrl + '/' + userId;
-        console.log(userIdUrl);
-        return fetch(userIdUrl, {
-            method: "delete",
-            body: JSON.stringify(userId),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            },
-
-        })
-    }
+    static deleteUser(id) {
+        return fetch(`${UserApi.baseUrl}/${id}`, {
+          method: "delete",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          },
+        });
+      }
 
     static putUser(user, userId) {
         let userIdUrl = UserApi.baseUrl + '/' + userId;
