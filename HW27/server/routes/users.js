@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
 }).delete('/:id', function(req, res, next) {
   res.status(200).json({
     status: 'succes',
-    data: req.params,
+    data: req.body,
   }); 
 
 }).put('/:id', function(req, res, next) {
