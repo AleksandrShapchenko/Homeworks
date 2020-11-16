@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         UserApi.deleteUser(userId)
             .then(response => {
                 console.log(response);
-                regForm.style.display = "none";
+                delForm.style.display = "none";
                 usersContainer.style.display = "block";
             })
     })
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         console.log(user);
 
-        UserApi.sendUser(user)
+        UserApi.putUser(user)
             .then(response => {
                 console.log(response);
                 regForm.style.display = "none";
