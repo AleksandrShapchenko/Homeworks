@@ -1,12 +1,6 @@
 {
   "users": [
     {
-      "name": "Tatiana Hoffman",
-      "email": "ketoky@mailinator.net",
-      "password": "12345678",
-      "usersId": "0L14nmRxy"
-    },
-    {
       "name": "Blossom Griffith",
       "email": "kacexo@mailinator.com",
       "password": "Pa$$w0rd!",
@@ -47,6 +41,12 @@
       "email": "gopakule@mailinator.com",
       "password": "Pa$$w0rd!",
       "usersId": "v6yGEFO4k"
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "usersId": "gepP3yiO_"
     },
     {
       "name": "Skyler Clark",

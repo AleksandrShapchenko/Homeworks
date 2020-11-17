@@ -1,8 +1,9 @@
 class User {
-    constructor({ name, email, password }) {
+    constructor({ name, email, password, userId }) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.userId = userId;
     }
 }
 // get & post - users
@@ -29,9 +30,6 @@ class UserApi {
     static deleteUser(id) {
         return fetch(`${UserApi.baseUrl}/${id}`, {
           method: "delete",
-        //   headers: {
-        //     "Content-type": "application/json; charset=UTF-8"
-        //   },
         });
       }
 
@@ -89,12 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     putForm.addEventListener('submit', (e) => {
         e.preventDefault();
-
+        console.log(putForm.elements);
         let { name, email, password, userId } = putForm.elements;
         let user = new User({
             name: name.value,
             email: email.value,
-            password: password.value
+            password: password.value,
+            userId: userId.value,
         });
         console.log(user);
 
