@@ -93,12 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
             email: email.value,
             password: password.value,
         });
-        let userId = putForm.elements.userId;
+        let userId = putForm.elements.userId.value;
 
         UserApi.putUser(user, userId)
             .then(response => {
                 console.log(response);
-                regForm.style.display = "none";
+                putForm.style.display = "none";
                 usersContainer.style.display = "block";
             })
     })
