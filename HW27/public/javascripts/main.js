@@ -1,9 +1,8 @@
 class User {
-    constructor({ name, email, password, userId }) {
+    constructor({ name, email, password }) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.userId = userId;
     }
 }
 // get & post - users
@@ -88,15 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
     putForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        let { name, email, password, userId } = putForm.elements;
+        let { name, email, password } = putForm.elements;
         let user = new User({
             name: name.value,
             email: email.value,
             password: password.value,
-            userId: userId.value,
         });
+        let userId = putForm.elements.userId;
 
-        UserApi.putUser(user, user.userId)
+        UserApi.putUser(user, userId)
             .then(response => {
                 console.log(response);
                 regForm.style.display = "none";
