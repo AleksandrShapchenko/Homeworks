@@ -2,6 +2,8 @@ const express = require('express');
 const shortid = require('shortid');
 const router = express.Router();
 const db = require('../database/database');
+let id = req.params.id;
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   let users = db.get('users');
@@ -28,6 +30,7 @@ router.get('/', function(req, res, next) {
   });
 
 }).delete('/:id', function(req, res, next) {
+
   res.status(200).json({
     status: 'succes',
     data: req.body,

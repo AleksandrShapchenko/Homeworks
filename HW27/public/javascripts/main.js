@@ -10,6 +10,7 @@ class User {
 class UserApi {
     static baseUrl = 'users';
 
+
     static getUsers() {
         return fetch(UserApi.baseUrl);
     }
@@ -26,6 +27,7 @@ class UserApi {
     }
 
     static deleteUser(id) {
+        console.log(id);
         return fetch(`${UserApi.baseUrl}/${id}`, {
           method: "delete",
           headers: {
@@ -78,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         let userId = delForm.elements.delete.value;
+        console.log(userId + '');
 
         UserApi.deleteUser(userId)
             .then(response => {
