@@ -39,9 +39,10 @@ router.get('/', function (req, res, next) {
   db.get('users')
     .find({ usersId: req.params.id })
     .assign({
-      name: req.params.name,
-
-    });
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    }).write();
   res.status(200).json({
     status: 'succes',
     data: req.body,
