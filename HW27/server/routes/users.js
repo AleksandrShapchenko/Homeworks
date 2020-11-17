@@ -36,10 +36,15 @@ router.get('/', function (req, res, next) {
   });
 
 }).put('/:id', function (req, res, next) {
-  // db.get('users').find();
+  db.get('users')
+    .find({ usersId: req.params.id })
+    .assign({
+      name: req.params.name,
+
+    });
   res.status(200).json({
     status: 'succes',
-    data: data,
+    data: req.body,
   });
 
   console.log(req.users);

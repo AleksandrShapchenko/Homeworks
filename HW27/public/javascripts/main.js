@@ -33,8 +33,8 @@ class UserApi {
         });
       }
 
-    static putUser(user) {
-        return fetch(UserApi.baseUrl, {
+    static putUser(user, id) {
+        return fetch(`${UserApi.baseUrl}/${id}`, {
             method: "put",
             body: JSON.stringify(user),
             headers: {
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     putForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        console.log(putForm.elements);
+
         let { name, email, password, userId } = putForm.elements;
         let user = new User({
             name: name.value,
@@ -95,9 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
             password: password.value,
             userId: userId.value,
         });
-        console.log(user);
 
-        UserApi.putUser(user)
+        console.log(user.userId);
+
+        UserApi.putUser(user, user.userId)
             .then(response => {
                 console.log(response);
                 regForm.style.display = "none";
