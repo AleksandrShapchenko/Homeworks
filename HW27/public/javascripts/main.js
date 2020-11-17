@@ -27,17 +27,15 @@ class UserApi {
     }
 
     static deleteUser(id) {
-        console.log(id);
         return fetch(`${UserApi.baseUrl}/${id}`, {
           method: "delete",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8"
-          },
+        //   headers: {
+        //     "Content-type": "application/json; charset=UTF-8"
+        //   },
         });
       }
 
-    static putUser(user, userId) {
-        let userIdUrl = UserApi.baseUrl + '/' + userId;
+    static putUser(user) {
         return fetch(UserApi.baseUrl, {
             method: "put",
             body: JSON.stringify(user),
@@ -80,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         let userId = delForm.elements.delete.value;
-        console.log(userId + '');
 
         UserApi.deleteUser(userId)
             .then(response => {

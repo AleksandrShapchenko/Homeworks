@@ -36,7 +36,7 @@ router.get('/', function (req, res, next) {
   });
 
 }).put('/:id', function (req, res, next) {
-  db.get('users').find();
+  // db.get('users').find();
   res.status(200).json({
     status: 'succes',
     data: data,
