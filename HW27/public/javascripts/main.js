@@ -96,8 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
             userId: userId.value,
         });
 
-        console.log(user.userId);
-
         UserApi.putUser(user, user.userId)
             .then(response => {
                 console.log(response);

@@ -12,7 +12,6 @@ router.get('/', function (req, res, next) {
   });
 
 }).post('/', function (req, res, next) {
-  console.log(req.body);
   if (!req.body) {
     return res.status(400).json({
       status: 'error',
@@ -46,10 +45,7 @@ router.get('/', function (req, res, next) {
   res.status(200).json({
     status: 'succes',
     data: req.body,
-  });
-
-  console.log(req.users);
-  // req.users[req.body.user.id] = req.body.user;
+  }); s
 
 });
 
