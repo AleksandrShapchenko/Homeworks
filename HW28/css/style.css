@@ -1,0 +1,25 @@
+#btn {
+    cursor: pointer;
+    margin-top: .25rem;
+    margin-bottom: .25rem;
+    color: #007bff;
+    border-color: #007bff;
+    font: 400 13.3333px Arial;
+    background-color: transparent;
+    border: 1px solid;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#btn:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+#btn:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.5);
+}
