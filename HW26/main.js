@@ -30,63 +30,75 @@ function init() {
             getPostById().then((post) => {
 
                 getCommentsByPostId(post)
+            }).catch((error) => {
+                postInput.disabled = false;
+                console.log(error);
             })
         }
 
         async function getPostById() {
             let response = await fetch(`${url}${postUrl}/${id}`);
-            let data = await response.json();
+            if (response.ok) {
+                let response = await fetch(`${url}${postUrl}/${id}`);
+                let data = await response.json();
 
-            let post = document.createElement('pre');
-            post.className = 'post';
-            let span = document.createElement('span');
-            let keyValue = '';
+                let post = document.createElement('pre');
+                post.className = 'post';
+                let span = document.createElement('span');
+                let keyValue = '';
 
-            let header = document.createElement('h2');
-            header.innerHTML = `Post№ ${++postNumber}`;
-            header.className = 'post-header';
+                let header = document.createElement('h2');
+                header.innerHTML = `Post№ ${++postNumber}`;
+                header.className = 'post-header';
 
-            post.append(header);
-            for (const [key, value] of Object.entries(data)) {
+                post.append(header);
+                for (const [key, value] of Object.entries(data)) {
 
-                if (key != 'userId' && key != 'id') {
-                    keyValue = `${key}: ${value}\n`;
-                    span.append(keyValue);
-                }
-
-            }
-            
-            post.append(span);
-            postContainer.append(post);
-            postHistory.push(data);
-            postInput.disabled = false;
-            postInput.focus();
-
-            return post;
-        }
-
-        async function getCommentsByPostId(post) {
-            let response = await fetch(`${url}${postUrl}/${id}/${commentsUrl}`);
-            let data = await response.json();
-
-            let commentsHeader = document.createElement('h3');
-            commentsHeader.innerHTML = 'Comments: '
-            commentsHeader.className = 'post-header';
-
-            let span = document.createElement('span');
-
-            post.append(commentsHeader);
-            for (const entry of data) {
-                for (const [key, value] of Object.entries(entry)) {
-
-                    if (key == 'email' || key == 'body') {
+                    if (key != 'userId' && key != 'id') {
                         keyValue = `${key}: ${value}\n`;
                         span.append(keyValue);
                     }
 
                 }
+
+                post.append(span);
+                postContainer.append(post);
+                postHistory.push(data);
+                postInput.disabled = false;
+                postInput.focus();
+
+                return post;
+            } else {
+                throw new Error('error with getting post');
             }
-            post.append(span);
+        }
+
+        async function getCommentsByPostId(post) {
+            let response = await fetch(`${url}${postUrl}/${id}/${commentsUrl}`);
+            if (response.ok) {
+                let data = await response.json();
+
+                let commentsHeader = document.createElement('h3');
+                commentsHeader.innerHTML = 'Comments: '
+                commentsHeader.className = 'post-header';
+
+                let span = document.createElement('span');
+
+                post.append(commentsHeader);
+                for (const entry of data) {
+                    for (const [key, value] of Object.entries(entry)) {
+
+                        if (key == 'email' || key == 'body') {
+                            keyValue = `${key}: ${value}\n`;
+                            span.append(keyValue);
+                        }
+
+                    }
+                }
+                post.append(span);
+            } else {
+                throw new Error('error with getting comments');
+            }
         }
     }
 }
