@@ -10,7 +10,6 @@ class User {
 class UserApi {
     static baseUrl = 'users';
 
-
     static getUsers() {
         return fetch(UserApi.baseUrl);
     }
