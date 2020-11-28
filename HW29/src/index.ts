@@ -72,7 +72,7 @@ function init(): void {
             }
         }
 
-        async function getCommentsByPostId(post: Promise<HTMLPreElement>) {
+        async function getCommentsByPostId(post: HTMLPreElement) {
             let response = await fetch(`${url}${postUrl}/${id}/${commentsUrl}`);
             if (response.ok) {
                 let data = await response.json();

@@ -45,23 +45,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './src/index.ts',
   output: {
-    // options related to how webpack emits results
-    path: path.resolve(__dirname, "./dist"), // string (default)
-    // the target directory for all output files
-    // must be an absolute path (use the Node.js path module)
-    filename: "main.js", // string (default)
-    // the filename template for entry chunks
+    path: path.resolve(__dirname, "./dist"),
+    filename: "main.js"
   },
   
   plugins: [
     new webpack.ProgressPlugin(),
     new MiniCssExtractPlugin({ filename:'main.[chunkhash].css' }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/index.html'), // шаблон
-      filename: 'index.html', // название выходного файла
+      template: path.resolve(__dirname, './src/index.html'),
+      filename: 'index.html',
   }),
   ],
 
