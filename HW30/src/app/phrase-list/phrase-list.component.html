@@ -1,0 +1,24 @@
+<ol>
+    <li *ngFor="let phrase of phrases">
+        <p><b>Приветствие: </b> {{phrase.value}}
+        <b> Язык: </b> {{phrase.language}}</p>  
+    </li>
+</ol>
+
+<br>
+
+<input 
+    type="text" 
+    placeholder="Приветствие" 
+    [(ngModel)]='currentValue'
+>
+<br>
+<br>
+<input 
+    type="text" 
+    placeholder="Язык" 
+    [(ngModel)]='currentLanguage'
+>
+<br>
+<br>
+<button (click)="addPhrase()">Add</button>
