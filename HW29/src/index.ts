@@ -16,7 +16,7 @@ interface CommentsResponse {
         'body': string;
         'email': string;
         'id': number;
-        'name': 'string';
+        'name': string;
         'postId': number;
     }
 }
@@ -93,8 +93,6 @@ function init(): void {
             const response: Response = await fetch(`${url}${postUrl}/${id}/${commentsUrl}`);
             if (response.ok) {
                 const data: CommentsResponse[] = await response.json();
-                console.log(data);
-
 
                 const commentsHeader = document.createElement('h3');
                 commentsHeader.innerHTML = 'Comments: '
