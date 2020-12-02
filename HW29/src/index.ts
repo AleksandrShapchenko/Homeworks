@@ -4,6 +4,23 @@ const commentsUrl: string = 'comments';
 const postHistory: any[] = [];
 let postNumber: number = 0;
 
+interface PostResponse {
+    'userId': number;
+    'id': number;
+    'title': string;
+    'body': string;
+}
+
+interface CommentsResponse {
+    [index: number]: {
+        'body': string;
+        'email': string;
+        'id': number;
+        'name': 'string';
+        'postId': number;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', init);
 
 function init(): void {
@@ -37,16 +54,16 @@ function init(): void {
         }
 
         async function getPostById(): Promise<HTMLPreElement> {
-            let response = await fetch(`${url}${postUrl}/${id}`);
+            const response: Response = await fetch(`${url}${postUrl}/${id}`);
             if (response.ok) {
-                let response = await fetch(`${url}${postUrl}/${id}`);
-                let data = await response.json();
+                const data: PostResponse = await response.json();
+                console.log(data);
 
-                let post = document.createElement('pre');
+                const post = document.createElement('pre');
                 post.className = 'post';
-                let span = document.createElement('span');
+                const span = document.createElement('span');
 
-                let header = document.createElement('h2');
+                const header = document.createElement('h2');
                 header.innerHTML = `Post№ ${++postNumber}`;
                 header.className = 'post-header';
 
@@ -73,15 +90,17 @@ function init(): void {
         }
 
         async function getCommentsByPostId(post: HTMLPreElement) {
-            let response = await fetch(`${url}${postUrl}/${id}/${commentsUrl}`);
+            const response: Response = await fetch(`${url}${postUrl}/${id}/${commentsUrl}`);
             if (response.ok) {
-                let data = await response.json();
+                const data: CommentsResponse[] = await response.json();
+                console.log(data);
 
-                let commentsHeader = document.createElement('h3');
+
+                const commentsHeader = document.createElement('h3');
                 commentsHeader.innerHTML = 'Comments: '
                 commentsHeader.className = 'post-header';
 
-                let span = document.createElement('span');
+                const span = document.createElement('span');
 
                 (await post).append(commentsHeader);
                 for (const entry of data) {
