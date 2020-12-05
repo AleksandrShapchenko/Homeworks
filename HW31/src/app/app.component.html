@@ -1,0 +1,6 @@
+<app-products>
+  <app-product-card *ngFor="let product of products" (add) ="addProduct($event)" [id] = "product.id">
+     <p>Name: {{product.name}}</p>
+     <p>Price: {{product.price}}</p>
+  </app-product-card>   
+</app-products>
